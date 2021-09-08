@@ -17,9 +17,10 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = ["id", "question", "label"]
 
 class QuestionSerializer(serializers.ModelSerializer):
-    Answer_set = AnswerSerializer(many=True)
+    answer_set = AnswerSerializer(many=True)
     class Meta:
-        model = Questionfield = "__all__"
+        model = Question
+        fields = "__all__"
 
 
 class UsersAnswerSerializer(serializers.ModelSerializer):

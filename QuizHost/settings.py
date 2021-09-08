@@ -33,6 +33,7 @@ AUTH_USER_MODEL = 'accounts.User'
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'knox',
     'accounts',
     'quiz',
