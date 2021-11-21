@@ -61,3 +61,4 @@ class UsersAnswer(models.Model):
 @receiver(pre_save, sender = Quiz)
 def Slugify_name(sender, instance, *args, **kwargs):
     instance.slug = slugify(instance.name)
+

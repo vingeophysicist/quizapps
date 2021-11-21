@@ -24,5 +24,4 @@ urlpatterns = [
 ]
 
 
-#Hello dear I am unavailable to answer your question but i am sure that one of my colleague will be more than happy to help. Just request for a new session and you will be connected with another tutor
 
