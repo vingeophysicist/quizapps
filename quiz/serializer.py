@@ -3,6 +3,7 @@ from .models import Quiz, Question, Answer, QuizTaker, UsersAnswer
 
 class QuizListSerializer(serializers.ModelSerializer):
     questions_count = serializers.SerializerMethodField()
+    
     class Meta:
         model = Quiz
         fields = ['id', 'name', 'description', 'image', 'slug', 'questions_count']
@@ -74,7 +75,6 @@ class MyQuizListSerializer(serializers.ModelSerializer):
                 
         
         
-
 class QuizTakerSerializer(serializers.ModelSerializer):
     usersanswer_set = UsersAnswerSerializer(many=True)
 
@@ -98,3 +98,6 @@ class QuizDetailSerializer(serializers.ModelSerializer):
 			return serializer.data
 		except QuizTaker.DoesNotExist:
 			return None
+
+
+

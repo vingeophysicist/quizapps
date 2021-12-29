@@ -28,8 +28,8 @@ class MyQuizListAPI(generics.ListAPIView):
             ).distinct()
         return queryset
     
-    def get_serializer_context(self, *args, **kwargs):
-        return {'request': self.request}
+    #def get_serializer_context(self, *args, **kwargs):
+    #    return {'request': self.request}
     
         
 
@@ -66,7 +66,7 @@ class QuizDetailAPI(generics.RetrieveAPIView):
 		last_question = None
 		obj, created = QuizTaker.objects.get_or_create(user=self.request.user, quiz=quiz)
 		if created:
-			for question in Question.objects.filter(quiz=quiz):
+			for question in Quiz.objects.filter(quiz=quiz):
 				UsersAnswer.objects.create(quiz_taker=obj, question=question)
 		else:
 			last_question = UsersAnswer.objects.filter(quiz_taker=obj, answer__isnull=False)
@@ -76,6 +76,7 @@ class QuizDetailAPI(generics.RetrieveAPIView):
 				last_question = None
 
 		return Response({'quiz': self.get_serializer(quiz, context={'request': self.request}).data, 'last_question_id': last_question})
+
 
 class SaveUsersAnswer(generics.UpdateAPIView):
     serializer_class = UsersAnswerSerializer
@@ -93,7 +94,9 @@ class SaveUsersAnswer(generics.UpdateAPIView):
         if quiztaker.completed:
             return Response({"message" : "This quiz is already complete. You can't answer anymore question"}, status=status.HTTP_412_PRECONDITION_FAILED)
         
-        obj = get_object_or_40(UsersAnswer, quiz_taker=quiztaker, question=question)
+        obj = get_object_or_404(UsersAnswer, quiz_taker=quiztaker, question=question)
         obj.Answer = answer
         obj.save()
         return Response(self.get_serializer(obj).data)
+    
+

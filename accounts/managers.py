@@ -14,7 +14,6 @@ class CustomUserManager(BaseUserManager):
     def create_user(self, name, username, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
-        return self._create_user(name, username, email, password, **extra_fields)
 
     def create_superuser(self, name, username, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
@@ -24,6 +23,5 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('superuser must have staff previledge')
         return self._create_user(name, username, email, password, **extra_fields)
 
-      
 
 
